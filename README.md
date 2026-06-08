@@ -158,15 +158,27 @@ streamlit run app/app.py
 
 The app has two tabs:
 
+
+
 1. `NSL-KDD Model Demo`
    - loads the saved binary and multiclass models
    - lets you select example network connections
    - shows normal/attack and attack-category predictions
 
+
+<img width="1512" height="982" alt="Screenshot 2026-06-09 at 2 07 27 AM" src="https://github.com/user-attachments/assets/41b18b36-14cc-4eee-b7db-e9009e70d0c1" />
+
+
+
+
 2. `Live Web Traffic Monitor`
    - reads Apache/Nginx-style access logs
    - shows request volume, top IPs, error rate, suspicious paths, and high-risk requests
    - uses transparent rule-based anomaly scoring for live traffic monitoring
+
+<img width="1512" height="982" alt="Screenshot 2026-06-09 at 2 08 23 AM" src="https://github.com/user-attachments/assets/f2fbe271-5406-4eb9-86c8-0b18ac4fc770" />
+
+
 
 To generate demo traffic for the live dashboard, run this in a second terminal:
 
