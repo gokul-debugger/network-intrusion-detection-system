@@ -2,6 +2,15 @@
 
 A machine learning project for detecting malicious network connections using the NSL-KDD intrusion detection benchmark. The project builds both binary intrusion detection and multiclass attack classification workflows, then prepares saved models for a Streamlit demo.
 
+<p>
+  <a href="#streamlit-app"><img src="https://img.shields.io/badge/Dashboard-Run_Locally-167D8D?style=for-the-badge&logo=streamlit&logoColor=white" alt="Run the intrusion-detection dashboard locally"></a>
+  <a href="#versioned-evaluation"><img src="https://img.shields.io/badge/Evaluation-V2_Workflow-2457A7?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="Read the versioned evaluation workflow"></a>
+  <a href="#how-to-run"><img src="https://img.shields.io/badge/Setup-Getting_Started-455A64?style=for-the-badge&logo=python&logoColor=white" alt="Set up the project"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-8B6508?style=for-the-badge" alt="Read the MIT license"></a>
+</p>
+
+The dashboard currently runs locally. The dashboard button opens its launch instructions, not a hosted deployment.
+
 ## Project Goals
 
 - Detect whether a network connection is normal or malicious
@@ -106,6 +115,9 @@ This project adds a cybersecurity and anomaly detection dimension to a data scie
 
 ## Model Results
 
+These tables preserve the historical notebook results. They are not results from
+the separately versioned v2 workflow described below.
+
 ### Binary Intrusion Detection
 
 The binary task predicts whether a connection is normal or malicious.
@@ -128,6 +140,31 @@ The multiclass task predicts the attack category: `normal`, `dos`, `probe`, `r2l
 | Random Forest | 73.44% | 47.51% | 68.70% |
 
 The lower macro F1 reflects the difficulty of rare categories such as R2L and U2R. This is an important security-learning point: overall accuracy can hide weak performance on minority attack types.
+
+## Versioned Evaluation
+
+The original notebooks and their saved outputs remain available as the historical
+workflow. They compared candidates on the official test file and selected their
+saved models from those scores; those results should not be described as an
+independent model-selection holdout.
+
+The separate [v2 evaluation workflow](docs/evaluation_v2.md) selects models using
+group-aware validation inside the official training data, refits the selected
+models, then reports retrospective official-test results. It never replaces the
+existing demo models, reports, or notebook outputs.
+
+V2 retains the project's existing attack-category mapping in `src/config.py` for
+comparability. Taxonomy changes require a separate versioned review; improving
+the selection protocol does not establish independent validation or better test performance.
+
+```bash
+python -m pip install -r requirements-evaluation.txt
+python scripts/evaluate_models_v2.py
+python -B -m pytest tests -p no:cacheprovider
+```
+
+New studies are written once to ignored `runs/` directories. The Streamlit app
+continues to use its existing models until a separately reviewed promotion.
 
 ## How to Run
 
