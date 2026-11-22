@@ -16,6 +16,8 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: requirements-evaluation.txt
-      - run: python -m pip install -r requirements-evaluation.txt
+          cache-dependency-path: |
+            requirements-evaluation.txt
+            requirements-upgrade.txt
+      - run: python -m pip install -r requirements-upgrade.txt
       - run: python -B -m pytest tests -p no:cacheprovider -W error::FutureWarning

@@ -1,0 +1,2 @@
+-r requirements-evaluation.txt
+lightgbm>=4.6,<5

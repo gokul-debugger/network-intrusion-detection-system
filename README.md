@@ -11,6 +11,15 @@ A machine learning project for detecting malicious network connections using the
 
 The dashboard currently runs locally. The dashboard button opens its launch instructions, not a hosted deployment.
 
+## Editions
+
+The [original NSL-KDD edition](https://github.com/gokul-debugger/network-intrusion-detection-system/tree/legacy/nsl-kdd)
+is maintained separately from the
+[modern upgrade under development](https://github.com/gokul-debugger/network-intrusion-detection-system/tree/feature/modern-upgrade).
+The default `main` branch will become the complete upgraded edition only after
+the newer-data workflow, explainability, dashboard, and deployment checks pass.
+Until then, the upgrade branch is work in progress, not a released modern IDS.
+
 ## Project Goals
 
 - Detect whether a network connection is normal or malicious
@@ -165,6 +174,20 @@ python -B -m pytest tests -p no:cacheprovider
 
 New studies are written once to ignored `runs/` directories. The Streamlit app
 continues to use its existing models until a separately reviewed promotion.
+
+### Upgrade Study
+
+The opt-in [v3 workflow](docs/evaluation_v3.md) adds LightGBM candidates,
+validation-selected binary thresholds, and exact-membership checks before
+evaluating `KDDTest-21`. It saves a separate study and never changes the original
+demo or its default models. The harder test file is a dependent subset, not
+independent validation. See the [upgrade and deployment roadmap](docs/upgrade_roadmap.md)
+for staged explainability, dashboard, packaging, and modern-dataset work.
+
+```bash
+python -m pip install -r requirements-upgrade.txt
+python scripts/evaluate_models_v3.py --lightgbm --hard-test Dataset/raw/KDDTest-21.txt
+```
 
 ## How to Run
 
