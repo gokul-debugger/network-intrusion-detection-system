@@ -189,6 +189,25 @@ python -m pip install -r requirements-upgrade.txt
 python scripts/evaluate_models_v3.py --lightgbm --hard-test Dataset/raw/KDDTest-21.txt
 ```
 
+### Explain the Selected Models
+
+The separate [SHAP workflow](docs/explainability.md) explains the exact selected
+models in a trusted completed v3 study. It exports per-class feature importance,
+local waterfall plots, contribution arrays, and reconstruction diagnostics.
+Background rows come only from the recorded training input. Output units and
+class order are explicit; explanations are not causal evidence or new performance
+scores. No original model, evaluation package, notebook, or dashboard default changes.
+
+```bash
+python -m pip install -r requirements-explainability.txt
+python -B scripts/explain_models.py --trust-local-models
+```
+
+Use that flag only for model files you trust: joblib loading can execute code.
+Exports go to a new ignored run directory, not into the original study or demo.
+Dashboard integration follows as a separate upgrade stage.
+See the [verified example figures and check results](docs/explainability_check.md).
+
 ## How to Run
 
 Create and activate a virtual environment:
@@ -252,14 +271,19 @@ NSL-KDD is useful for learning, but it is not modern production network traffic.
 
 The web traffic monitor is intentionally log-based rather than packet-capture-based. This keeps the project safe, reproducible, and portfolio-friendly. It is not a replacement for enterprise security tools.
 
-## Future Improvements
+## Upgrade Roadmap
 
-- Add XGBoost or LightGBM
-- Add SHAP explainability
-- Evaluate on `KDDTest-21`
-- Add threshold tuning for binary detection
-- Build a richer Streamlit dashboard
-- Try a modern dataset such as CIC-IDS2017 or UNSW-NB15
+- [x] Add optional LightGBM candidates to the v3 reference workflow
+- [x] Add separate, verified SHAP explainability exports
+- [x] Evaluate the frozen choices on the dependent `KDDTest-21` subset
+- [x] Add validation-only threshold tuning for binary detection
+- [ ] Build a richer, deployment-safe Streamlit dashboard
+- [ ] Train/evaluate a separate newer-data workflow, such as UNSW-NB15 or CIC-IDS2017
+- [ ] Package the local dashboard and publish tested Streamlit deployments
+
+Completed entries concern the NSL-KDD reference workflow on the upgrade branch.
+They do not mean the modern-data edition is finished or the original demo has
+been replaced. See the [staged roadmap](docs/upgrade_roadmap.md).
 
 ## Author
 

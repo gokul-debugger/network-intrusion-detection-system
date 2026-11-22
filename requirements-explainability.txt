@@ -1,0 +1,3 @@
+-r requirements-upgrade.txt
+shap==0.54.1
+matplotlib>=3.9,<4

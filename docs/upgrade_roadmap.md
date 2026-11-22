@@ -41,7 +41,7 @@ of Git branch. Every study's archived source and manifest identify its actual co
 | Stage | Work | Status |
 |---|---|---|
 | 1 | Optional LightGBM, validation-only threshold/model selection, harder-subset evaluation, regression tests | Implemented and checked locally; see the separate v3 smoke-study note |
-| 2 | SHAP explanations for the selected supported model family | Planned |
+| 2 | SHAP explanations for the selected supported model family | Implemented as separate bounded, verified exports; see [the protocol](explainability.md) |
 | 3 | Richer, deployment-safe Streamlit dashboard with evidence views and validated inputs | Planned |
 | 4 | A modern dataset with its own schema, provenance, split, and models | Planned |
 | 5 | Installable dashboard/CLI distribution and hosted stable app | Planned; publish only after packaging and hosting checks |
