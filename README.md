@@ -1,15 +1,54 @@
 # Network Intrusion Detection System
 
-A machine learning project for detecting malicious network connections using the NSL-KDD intrusion detection benchmark. The project builds both binary intrusion detection and multiclass attack classification workflows, then prepares saved models for a Streamlit demo.
+An interactive NSL-KDD reference dashboard with validation-selected LightGBM
+models, connection-level SHAP explanations, and a separate rule-based access-log
+workspace. This branch is the modern-upgrade preview; newer-dataset training is
+still pending, and this is not a production intrusion detection system.
 
 <p>
-  <a href="#streamlit-app"><img src="https://img.shields.io/badge/Dashboard-Run_Locally-167D8D?style=for-the-badge&logo=streamlit&logoColor=white" alt="Run the intrusion-detection dashboard locally"></a>
+  <a href="#modern-dashboard"><img src="https://img.shields.io/badge/Dashboard-Run_Locally-167D8D?style=for-the-badge&logo=streamlit&logoColor=white" alt="Run the modern reference dashboard locally"></a>
   <a href="#versioned-evaluation"><img src="https://img.shields.io/badge/Evaluation-V2_Workflow-2457A7?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="Read the versioned evaluation workflow"></a>
   <a href="#how-to-run"><img src="https://img.shields.io/badge/Setup-Getting_Started-455A64?style=for-the-badge&logo=python&logoColor=white" alt="Set up the project"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-8B6508?style=for-the-badge" alt="Read the MIT license"></a>
 </p>
 
-The dashboard currently runs locally. The dashboard button opens its launch instructions, not a hosted deployment.
+The original dashboard remains available as the legacy edition. The modern
+dashboard's launch and deployment details are below; a hosted URL is added only
+after verification.
+
+## Reference Evidence
+
+| Frozen v3 benchmark | Binary precision | Binary recall | Binary F1 | Multiclass macro-F1 |
+|---|---:|---:|---:|---:|
+| KDDTest+ | 96.87% | 68.68% | 80.38% | 57.47% |
+| KDDTest-21 | 95.30% | 58.57% | 72.55% | 48.18% |
+
+Both tasks selected LightGBM using training-data validation. The binary threshold
+was frozen before benchmark scoring. KDDTest-21 is a dependent harder subset,
+not external validation. Minority-category performance, prior test inspection,
+benchmark age, and train/test feature overlaps remain limitations.
+[Protocol and verification](docs/evaluation_v3_smoke_study.md).
+
+## Modern Dashboard
+
+- **Connections:** labelled examples, a complete manual form, bounded CSV batches,
+  independent binary/category predictions, and a session-only threshold override.
+- **Traffic logs:** immediate synthetic traffic or bounded in-memory uploads,
+  masked IP display, request/error summaries, filters, and transparent rule scores.
+- **Model evidence:** balanced metrics, per-class support, confusion matrices,
+  validation tradeoffs, and frozen source provenance.
+- **Explanations:** global importance and on-demand local SHAP waterfalls with
+  explicit output units and checked reconstruction.
+
+```bash
+python -m pip install -r app/requirements.txt
+streamlit run app/modern_app.py
+```
+
+The checked deployment bundle is included; visitors do not need to train models,
+run notebooks, or start a simulator. No uploaded log is written to a shared
+server file, and no server-path or model-upload controls are exposed.
+[Deployment, privacy, and attribution](docs/dashboard.md).
 
 ## Editions
 
@@ -227,7 +266,7 @@ jupyter notebook
 
 Run notebooks in order from `01` to `05`.
 
-## Streamlit App
+## Legacy Streamlit App
 
 After running the notebooks and saving models:
 
@@ -242,14 +281,14 @@ The app has two tabs:
    - lets you select example network connections
    - shows normal/attack and attack-category predictions
 
-<img width="1512" height="982" alt="Screenshot 2026-06-09 at 2 07 27 AM" src="https://github.com/user-attachments/assets/41b18b36-14cc-4eee-b7db-e9009e70d0c1" />
+<img width="1512" height="982" alt="Legacy NSL-KDD dashboard showing binary and attack-category predictions" src="https://github.com/user-attachments/assets/41b18b36-14cc-4eee-b7db-e9009e70d0c1" />
 
 2. `Live Web Traffic Monitor`
    - reads Apache/Nginx-style access logs
    - shows request volume, top IPs, error rate, suspicious paths, and high-risk requests
    - uses transparent rule-based anomaly scoring for live traffic monitoring
 
-<img width="1512" height="982" alt="Screenshot 2026-06-09 at 2 08 23 AM" src="https://github.com/user-attachments/assets/f2fbe271-5406-4eb9-86c8-0b18ac4fc770" />
+<img width="1512" height="982" alt="Legacy web-log monitor showing request volume, status patterns, and rule-based risk summaries" src="https://github.com/user-attachments/assets/f2fbe271-5406-4eb9-86c8-0b18ac4fc770" />
 
 To generate demo traffic for the live dashboard, run this in a second terminal:
 
@@ -277,7 +316,7 @@ The web traffic monitor is intentionally log-based rather than packet-capture-ba
 - [x] Add separate, verified SHAP explainability exports
 - [x] Evaluate the frozen choices on the dependent `KDDTest-21` subset
 - [x] Add validation-only threshold tuning for binary detection
-- [ ] Build a richer, deployment-safe Streamlit dashboard
+- [x] Build a richer, deployment-safe reference Streamlit dashboard
 - [ ] Train/evaluate a separate newer-data workflow, such as UNSW-NB15 or CIC-IDS2017
 - [ ] Package the local dashboard and publish tested Streamlit deployments
 

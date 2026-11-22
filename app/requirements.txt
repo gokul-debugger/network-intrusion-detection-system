@@ -1,0 +1,11 @@
+streamlit==1.67.0
+plotly==6.9.0
+numpy==2.4.6
+pandas==3.0.3
+scipy==1.17.1
+scikit-learn==1.9.0
+joblib==1.5.3
+threadpoolctl==3.6.0
+lightgbm==4.7.0
+shap==0.54.1
+matplotlib==3.10.9

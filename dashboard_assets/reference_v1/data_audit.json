@@ -1,0 +1,66 @@
+{
+  "training": {
+    "rows": 125973,
+    "duplicate_feature_rows": 16
+  },
+  "historical_test": {
+    "rows": 22544,
+    "category_support": {
+      "normal": 9711,
+      "dos": 7460,
+      "r2l": 2885,
+      "probe": 2421,
+      "u2r": 67
+    },
+    "train_overlapping_feature_rows": 664,
+    "test_only_attack_types": [
+      "apache2",
+      "httptunnel",
+      "mailbomb",
+      "mscan",
+      "named",
+      "processtable",
+      "ps",
+      "saint",
+      "sendmail",
+      "snmpgetattack",
+      "snmpguess",
+      "sqlattack",
+      "udpstorm",
+      "worm",
+      "xlock",
+      "xsnoop",
+      "xterm"
+    ]
+  },
+  "harder_test": {
+    "rows": 11850,
+    "category_support": {
+      "dos": 4344,
+      "r2l": 2885,
+      "probe": 2402,
+      "normal": 2152,
+      "u2r": 67
+    },
+    "train_overlapping_feature_rows": 529,
+    "test_only_attack_types": [
+      "apache2",
+      "httptunnel",
+      "mailbomb",
+      "mscan",
+      "named",
+      "processtable",
+      "ps",
+      "saint",
+      "sendmail",
+      "snmpgetattack",
+      "snmpguess",
+      "sqlattack",
+      "udpstorm",
+      "worm",
+      "xlock",
+      "xsnoop",
+      "xterm"
+    ]
+  }
+}

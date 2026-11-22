@@ -22,7 +22,8 @@ jobs:
             requirements-evaluation.txt
             requirements-upgrade.txt
             requirements-explainability.txt
-      - run: python -m pip install -r requirements-explainability.txt
+            app/requirements.txt
+      - run: python -m pip install -r requirements-explainability.txt -r app/requirements.txt
       - run: python -B -m pytest tests -p no:cacheprovider -W error::FutureWarning
         env:
           MPLCONFIGDIR: ${{ runner.temp }}/intrusion-matplotlib
