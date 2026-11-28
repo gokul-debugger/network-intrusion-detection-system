@@ -87,6 +87,11 @@ The runtime does not fetch data, fit models, regenerate notebooks, or require a
 second terminal/simulator. Synthetic logs and examples are immediately available.
 No secrets are required by this application. SHAP is computed only on request.
 
+The included Codespaces configuration uses the same Python 3.12 runtime and
+`app/requirements.txt`, installs the Linux OpenMP runtime, and forwards port 8501.
+It retains the repository's XSRF/CORS protections. A Codespace preview is a
+development environment, not a permanent public deployment.
+
 ## Hosting
 
 The Streamlit Cloud app must select:
